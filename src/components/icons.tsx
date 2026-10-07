@@ -70,3 +70,11 @@ export function ArrowRightIcon(props: IconProps) {
     </Icon>
   );
 }
+
+export function PlusIcon(props: IconProps) {
+  return (
+    <Icon {...props}>
+      <path d="M12 4v16M4 12h16" />
+    </Icon>
+  );
+}
