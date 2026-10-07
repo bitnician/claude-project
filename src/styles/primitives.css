@@ -273,7 +273,7 @@
  * Links. Underlines are 1px, drawn in currentColor, and animate rather than toggle.
  * ------------------------------------------------------------------------------------------------------------ */
 
-/* Plain until hovered; the underline draws in from the left. */
+/* Plain until hovered (itself or an enclosing .group, e.g. a card); the underline draws in from the left. */
 @utility link {
   background-image: linear-gradient(currentColor, currentColor);
   background-repeat: no-repeat;
@@ -284,7 +284,8 @@
 
   &:hover,
   &:focus-visible,
-  &[aria-current="page"] {
+  &[aria-current="page"],
+  :where(.group):is(:hover, :focus-visible) & {
     background-position: 0 100%;
     background-size: 100% 1px;
   }
