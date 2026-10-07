@@ -1,0 +1,113 @@
+/*
+ * Design tokens.
+ *
+ * Runtime values live on :root as plain custom properties so they can change per breakpoint or per scope
+ * (.theme-inverse). The @theme inline block maps them onto Tailwind namespaces, which generates utilities such as
+ * bg-surface, text-muted, border-divider, px-gutter, h-header, aspect-product and ease-editorial.
+ */
+
+:root {
+  /* Palette: monochrome first; color is reserved for status. */
+  --background: #ffffff;
+  --foreground: #000000;
+  --surface: #f9f9f9; /* secondary panels, drawers, banners */
+  --image: #fbfbfb; /* behind product photography */
+  --muted: #767676; /* secondary text; passes AA on white */
+  --divider: rgb(0 0 0 / 0.15); /* every hairline border */
+  --divider-strong: rgb(0 0 0 / 0.3);
+  --backdrop: rgb(0 0 0 / 0.4); /* modal / drawer scrim */
+  --disabled: #767676;
+  --disabled-surface: rgb(118 118 118 / 0.2);
+  --focus: #337eff;
+  --error: #cc0000;
+  --success: #006633;
+  --warning: #994d00;
+
+  /* Page frame */
+  --gutter: 1rem;
+  --grid-gap: 0.5rem;
+  --section: 3rem;
+  --header-height: 3.5rem;
+
+  /* Motion: long, decelerating curve (--ease-editorial) for reveals; short duration for direct feedback. */
+  --duration-reveal: 800ms;
+  --duration-feedback: 300ms;
+}
+
+@media (width >= 48rem) {
+  :root {
+    --gutter: 2rem;
+    --section: 4rem;
+  }
+}
+
+@media (width >= 64rem) {
+  :root {
+    --gutter: 4rem;
+    --grid-gap: 1rem;
+    --section: 6rem;
+    --header-height: 4.5rem;
+  }
+}
+
+/* Inverted scope for dark bands (footer, image overlays). Everything token-driven flips with it. */
+.theme-inverse {
+  --background: #000000;
+  --foreground: #ffffff;
+  --surface: #191919;
+  --muted: #a3a3a3;
+  --divider: rgb(255 255 255 / 0.5);
+  --divider-strong: rgb(255 255 255 / 0.7);
+  --error: #ec716b;
+  --success: #60c96d;
+  --warning: #ee692d;
+
+  background-color: var(--background);
+  color: var(--foreground);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-surface: var(--surface);
+  --color-image: var(--image);
+  --color-muted: var(--muted);
+  --color-divider: var(--divider);
+  --color-divider-strong: var(--divider-strong);
+  --color-backdrop: var(--backdrop);
+  --color-disabled: var(--disabled);
+  --color-focus: var(--focus);
+  --color-error: var(--error);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+
+  --font-sans: var(--font-geist-sans), "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-display: var(--font-bodoni-moda), "Didot", "Bodoni 72", Georgia, serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+
+  --spacing-gutter: var(--gutter);
+  --spacing-grid: var(--grid-gap);
+  --spacing-section: var(--section);
+  --spacing-header: var(--header-height);
+}
+
+@theme {
+  /* 768 tablet, 1024 desktop, 1440 wide. 2xl is unused. */
+  --breakpoint-xl: 90rem;
+  --breakpoint-2xl: initial;
+
+  --container-page: 90rem;
+  --container-text: 41rem;
+
+  --radius-control: 2px;
+
+  --aspect-product: 3 / 4;
+  --aspect-portrait: 2 / 3;
+  --aspect-landscape: 3 / 2;
+  --aspect-story: 9 / 16;
+
+  --ease-editorial: cubic-bezier(0.5, 0, 0, 1);
+
+  --default-transition-duration: 300ms;
+  --default-transition-timing-function: cubic-bezier(0.5, 0, 0, 1);
+}

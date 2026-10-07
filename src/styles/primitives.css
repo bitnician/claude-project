@@ -1,0 +1,481 @@
+/*
+ * Reusable primitives, registered as Tailwind utilities so they compose with variants (md:, hover:, group-*)
+ * and are tree-shaken when unused. Breakpoints: md = 48rem (768px), lg = 64rem (1024px).
+ */
+
+/* ---------------------------------------------------------------------------------------------------------------
+ * Typography roles. Sizes step up once, at lg. Display uses the serif; everything else is the sans.
+ * ------------------------------------------------------------------------------------------------------------ */
+
+@utility type-display-l {
+  font-family: var(--font-display);
+  font-size: 4rem;
+  line-height: 1;
+  font-weight: 400;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+
+  @media (width >= 64rem) {
+    font-size: 8.5rem;
+  }
+}
+
+@utility type-display-m {
+  font-family: var(--font-display);
+  font-size: 3.5rem;
+  line-height: 1;
+  font-weight: 400;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+
+  @media (width >= 64rem) {
+    font-size: 6.5rem;
+  }
+}
+
+@utility type-headline {
+  font-size: 2.5rem;
+  line-height: 3rem;
+  font-weight: 300;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+
+  @media (width >= 64rem) {
+    font-size: 4rem;
+    line-height: 4.5rem;
+  }
+}
+
+@utility type-title-xl {
+  font-size: 2rem;
+  line-height: 2.5rem;
+  font-weight: 300;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+
+  @media (width >= 64rem) {
+    font-size: 3rem;
+    line-height: 3.5rem;
+  }
+}
+
+@utility type-title-l {
+  font-size: 1.5rem;
+  line-height: 2rem;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+
+  @media (width >= 64rem) {
+    font-size: 2rem;
+    line-height: 2.5rem;
+  }
+}
+
+@utility type-title-m {
+  font-size: 1.25rem;
+  line-height: 1.5rem;
+  font-weight: 500;
+  letter-spacing: 0;
+  text-transform: uppercase;
+
+  @media (width >= 64rem) {
+    font-size: 1.5rem;
+    line-height: 2rem;
+  }
+}
+
+@utility type-title-s {
+  font-size: 0.875rem;
+  line-height: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+
+  @media (width >= 64rem) {
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
+}
+
+@utility type-title-xs {
+  font-size: 0.75rem;
+  line-height: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+
+  @media (width >= 64rem) {
+    font-size: 0.875rem;
+  }
+}
+
+@utility type-lead {
+  font-size: 1rem;
+  line-height: 1.5rem;
+  font-weight: 300;
+  letter-spacing: 0;
+
+  @media (width >= 64rem) {
+    font-size: 1.125rem;
+  }
+}
+
+@utility type-body {
+  font-size: 0.875rem;
+  line-height: 1.375rem;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
+@utility type-small {
+  font-size: 0.75rem;
+  line-height: 1rem;
+  font-weight: 400;
+  letter-spacing: 0;
+
+  @media (width >= 64rem) {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+  }
+}
+
+@utility type-caption {
+  font-size: 0.625rem;
+  line-height: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+
+  @media (width >= 64rem) {
+    font-size: 0.6875rem;
+  }
+}
+
+@utility type-cta {
+  font-size: 0.75rem;
+  line-height: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+/* ---------------------------------------------------------------------------------------------------------------
+ * Layout. Gutter is 16 / 32 / 64px (base / md / lg); the page caps at 1440px.
+ * ------------------------------------------------------------------------------------------------------------ */
+
+@utility container-page {
+  width: 100%;
+  max-width: var(--container-page);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+/* Reading width for policy pages, checkout and account forms. */
+@utility container-text {
+  width: 100%;
+  max-width: calc(var(--container-text) + 2 * var(--gutter));
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+@utility section-y {
+  padding-block: var(--section);
+}
+
+/* 4 / 8 / 12 columns. Place children with col-span-* and col-start-*. */
+@utility grid-page {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  column-gap: var(--grid-gap);
+
+  @media (width >= 48rem) {
+    grid-template-columns: repeat(8, minmax(0, 1fr));
+  }
+
+  @media (width >= 64rem) {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+  }
+}
+
+/* Product listing: 2 / 3 / 4 up, tight gutters between images, generous air between rows. */
+@utility grid-products {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: var(--grid-gap);
+  row-gap: 2rem;
+
+  @media (width >= 48rem) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  @media (width >= 64rem) {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    row-gap: 3rem;
+  }
+}
+
+/* Three-zone header: menu on the left, wordmark centered, utilities on the right. */
+@utility header-bar {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
+  height: var(--header-height);
+  padding-inline: var(--gutter);
+
+  & > :first-child {
+    justify-self: start;
+  }
+
+  & > :last-child {
+    justify-self: end;
+  }
+}
+
+/* ---------------------------------------------------------------------------------------------------------------
+ * Imagery. Product shots sit on a near-white field, full-bleed in their cell, no border, no radius, no shadow.
+ * Pair with an aspect utility: aspect-product (3:4), aspect-portrait (2:3), aspect-landscape, aspect-story.
+ * ------------------------------------------------------------------------------------------------------------ */
+
+@utility media-frame {
+  position: relative;
+  overflow: hidden;
+  background-color: var(--image);
+
+  & > img,
+  & > video,
+  & > picture > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+/* Slow, slight push-in on hover of the frame or of an enclosing .group (e.g. the product card link). */
+@utility media-zoom {
+  & > img,
+  & > video,
+  & > picture > img {
+    transition: transform var(--duration-reveal) var(--ease-editorial);
+  }
+
+  &:hover > img,
+  &:hover > video,
+  &:hover > picture > img,
+  :where(.group):hover & > img,
+  :where(.group):hover & > video,
+  :where(.group):hover & > picture > img {
+    transform: scale(1.03);
+  }
+}
+
+/* ---------------------------------------------------------------------------------------------------------------
+ * Links. Underlines are 1px, drawn in currentColor, and animate rather than toggle.
+ * ------------------------------------------------------------------------------------------------------------ */
+
+/* Plain until hovered; the underline draws in from the left. */
+@utility link {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-repeat: no-repeat;
+  background-position: 100% 100%;
+  background-size: 0 1px;
+  padding-bottom: 1px;
+  transition: background-size var(--duration-reveal) var(--ease-editorial);
+
+  &:hover,
+  &:focus-visible,
+  &[aria-current="page"] {
+    background-position: 0 100%;
+    background-size: 100% 1px;
+  }
+}
+
+/* Underlined at rest (inline copy, "view all"); on hover the line sweeps out to the right and back in. */
+@utility link-underlined {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 100% 1px;
+  padding-bottom: 1px;
+
+  &:hover,
+  &:focus-visible {
+    animation: link-sweep var(--duration-reveal) var(--ease-editorial);
+  }
+}
+
+/* Primary navigation item: small caps label with the drawing underline. */
+@utility nav-link {
+  font-size: 0.75rem;
+  line-height: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  background-image: linear-gradient(currentColor, currentColor);
+  background-repeat: no-repeat;
+  background-position: 100% 100%;
+  background-size: 0 1px;
+  padding-bottom: 2px;
+  transition: background-size var(--duration-reveal) var(--ease-editorial);
+
+  &:hover,
+  &:focus-visible,
+  &[aria-current="page"] {
+    background-position: 0 100%;
+    background-size: 100% 1px;
+  }
+}
+
+@keyframes link-sweep {
+  0% {
+    background-position: 100% 100%;
+    background-size: 100% 1px;
+  }
+  50% {
+    background-position: 100% 100%;
+    background-size: 0 1px;
+  }
+  50.01% {
+    background-position: 0 100%;
+    background-size: 0 1px;
+  }
+  100% {
+    background-position: 0 100%;
+    background-size: 100% 1px;
+  }
+}
+
+/* ---------------------------------------------------------------------------------------------------------------
+ * Buttons. Compose: btn + one of btn-primary / btn-secondary, optionally btn-sm, btn-block or btn-icon.
+ * The fill is a ::before layer that contracts slightly on hover, so the label never moves.
+ * ------------------------------------------------------------------------------------------------------------ */
+
+@utility btn {
+  position: relative;
+  isolation: isolate;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 3rem;
+  padding: 1rem 1.5rem;
+  border: 0;
+  border-radius: var(--radius-control);
+  background: transparent;
+  color: var(--foreground);
+  font-size: 0.75rem;
+  line-height: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    transition:
+      transform var(--duration-reveal) var(--ease-editorial),
+      background-color var(--duration-feedback) var(--ease-editorial);
+  }
+
+  &:hover::before,
+  &:focus-visible::before {
+    transform: scale(0.97, 0.9);
+  }
+
+  &:disabled,
+  &[aria-disabled="true"] {
+    color: var(--disabled);
+    cursor: not-allowed;
+  }
+
+  &:disabled::before,
+  &[aria-disabled="true"]::before {
+    background-color: var(--disabled-surface);
+    box-shadow: none;
+    transform: none;
+  }
+}
+
+@utility btn-primary {
+  color: var(--background);
+
+  &::before {
+    background-color: var(--foreground);
+  }
+}
+
+@utility btn-secondary {
+  color: var(--foreground);
+
+  &::before {
+    box-shadow: inset 0 0 0 1px var(--foreground);
+    backdrop-filter: blur(15px);
+  }
+
+  &:hover::before,
+  &:focus-visible::before {
+    background-color: var(--divider);
+  }
+}
+
+@utility btn-sm {
+  min-height: 2.5rem;
+  padding: 0.75rem 1rem;
+}
+
+@utility btn-block {
+  width: 100%;
+}
+
+/* Square 44px hit area for icon-only controls (search, bag, close). Needs an aria-label. */
+@utility btn-icon {
+  width: 2.75rem;
+  min-height: 2.75rem;
+  padding: 0;
+  border-radius: 9999px;
+}
+
+/* ---------------------------------------------------------------------------------------------------------------
+ * Fields. Underline-only, no box, no radius; the line thickens on focus without shifting layout.
+ * ------------------------------------------------------------------------------------------------------------ */
+
+@utility field-line {
+  width: 100%;
+  appearance: none;
+  border: 0;
+  border-bottom: 1px solid var(--foreground);
+  border-radius: 0;
+  background: transparent;
+  padding: 0.75rem 0;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  font-weight: 300;
+  color: var(--foreground);
+  transition: box-shadow var(--duration-feedback) var(--ease-editorial);
+
+  &::placeholder {
+    color: var(--muted);
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: 0 1px 0 0 var(--foreground);
+  }
+
+  &[aria-invalid="true"] {
+    border-bottom-color: var(--error);
+    box-shadow: 0 1px 0 0 var(--error);
+  }
+
+  &:disabled {
+    color: var(--disabled);
+    border-bottom-color: var(--disabled);
+  }
+}
